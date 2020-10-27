@@ -1,0 +1,56 @@
+# lets get started
+class itemNode:
+    def init (self,data, cost=0):
+        self.name = data
+        self.cost = cost
+        self.category = None
+
+
+class listNode:
+
+    # initialize
+    def init(self):
+        self.l = []
+
+    # function to append listNode
+    def append(self, Node):
+        self.l.append(Node)
+
+    # function to get the total cost of the list
+    def getTotal(self, total=0): 
+        for each in self.l:
+            total += each.cost
+        return total
+ 
+
+
+
+class expenseTree:
+
+    def init(self): #init the expense tree
+        self.root = None 
+
+
+    #getItem from itemNode
+    def getItem(self, name, node):
+        if not node:
+            return None
+        if 
+
+
+
+    pass
+    #  func getMaxCost
+    def getMaxCost(self, maximum =0)
+    pass
+    #  func getMinCost
+
+    #
+class Classifier:
+        #luxury 
+        #
+    pass
+
+
+
+print(sampleList.getTotal)
