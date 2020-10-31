@@ -17,11 +17,25 @@ class itemNode:
         self.cost = cost
         self.category = None  # level of need
 
+    # mutator methods
     def setCost(self, c):
         self.cost = c
 
     def setCategory(self, cat):
         self.category = cat
+
+    def setName(self, n):
+        self.name = n
+
+    # accessor methods:
+    def getCost(self):
+        return self.cost
+
+    def getCategory(self):
+        return self.category
+
+    def getName(self):
+        return self.name
 
 
 '''
@@ -31,7 +45,7 @@ this gets passed to the expense tree
 '''
 
 
-class listNode:
+class listNode:  # contains the total expenses of a single month
 
     # initialize
     def __init__(self):
@@ -71,27 +85,29 @@ expense Tree sorts out the elements within the list
 
 class expenseTree:
 
+    # initializes the tree
+    def __init__(self, listNode):
+        self.root = listNode
+
     # insert func to insert the data according to it's amount
-    def tree(self, data):
-        if data == self.data:
-            return
+    def addNode(self, newListNode):
 
         # if the data inserted is less than cur value itll
         # go into the left node
-        if data < self.data:
-            if self.left:
-                self.left.tree(data)
+        if newListNode.getTotal() < self.root.getTotal():
+            if self.data:
+                self.left.addNode(self.data)
             else:
-                self.left = self.tree(data)
+                self.left = self.addNode(self.data)
 
 
         # if the data is greater than the value
         # of the current node then it goes right
         else:
             if self.right:
-                self.right.buildSTree(data)
+                self.right.addNode(self.data)
             else:
-                self.right = self.tree(data)
+                self.right = self.addNode(self.data)
 
     # this will first visit left node
     # then the root node and finally
@@ -102,7 +118,6 @@ class expenseTree:
         elements = []
         if self.left:  ###left
             elements += self.left.inOrderTrav()  # left
-
         elements.append(self.data)
 
         if self.right:
@@ -110,32 +125,26 @@ class expenseTree:
         return elements
 
     def insert(self, val):
-
         if self.root == None:
-            self.root = Node(val)
+            self.root = self(val)
         else:
             self.__insert(val, self.root)
 
     def __insert(self, val, currNode):
-
         if val < currNode.val:
-
             if currNode.leftChild == None:
                 currNode.leftChild = Node(val, parent=currNode)
                 self.updateBalanceFactor(currNode)
                 self.checkForBalanace(currNode)
             else:
                 self.__insert(val, currNode.leftChild)
-
         elif val > currNode.val:
-
             if currNode.rightChild == None:
                 currNode.rightChild = Node(val, parent=currNode)
                 self.updateBalanceFactor(currNode)
                 self.checkForBalanace(currNode)
             else:
                 self.__insert(val, currNode.rightChild)
-
         else:
             return "value already exist"
 
@@ -158,7 +167,8 @@ class expenseTree:
         # return max
         pass
 
-    # this find the minimum cost node
+        # this find the minimum cost node
+
     def getMinCost(self, minimum=0):
         # if self is None: #if self = None then exit
         #     return None
@@ -207,4 +217,3 @@ sampleList = listNode()
 sampleList.append(3)
 
 print(sampleList.getTotal)
-l)
